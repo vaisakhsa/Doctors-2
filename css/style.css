@@ -1,0 +1,333 @@
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
+:root {
+  --ink: #12261c;
+  --green-900: #0b3d24;
+  --green-700: #1f6b45;
+  --green-500: #2f9e63;
+  --green-100: #e6f4ec;
+  --accent: #2f9e63;
+  --paper: #f3f8f4;
+  --white: #ffffff;
+  --line: #dbe9df;
+  --shadow: 0 10px 30px rgba(11, 61, 36, 0.14);
+  --radius: 14px;
+  --header-h: 68px;
+  --font-display: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: 'Open Sans', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+a { color: inherit; }
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--teal-900);
+  color: var(--white);
+  padding: 10px 16px;
+  z-index: 2000;
+}
+.skip-link:focus { left: 10px; top: 10px; }
+
+/* ==========================================================================
+   Header / Nav
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 1000;
+  background: rgba(11, 61, 36, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.nav-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+}
+.brand span { color: var(--accent); }
+
+/* Hamburger button - mobile default */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1100;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  margin: 0 auto;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav: full-height slide-in panel */
+.site-nav {
+  position: fixed;
+  top: var(--header-h);
+  right: 0;
+  width: min(78vw, 320px);
+  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
+  background: var(--teal-900);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 4px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.site-nav.is-open { transform: translateX(0); }
+
+.nav-link {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 14px 10px;
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.nav-link:hover, .nav-link:focus-visible { color: var(--accent); }
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + 40px) 20px 60px;
+  background: url('../img/hero-bg.jpg') center/cover no-repeat;
+  color: var(--white);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,61,36,0.85) 0%, rgba(11,61,36,0.55) 55%, rgba(11,61,36,0.9) 100%);
+}
+.hero-inner {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.7;
+  opacity: 0.92;
+  margin-bottom: 28px;
+}
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--teal-900);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 20px rgba(0,0,0,0.2); }
+
+/* ==========================================================================
+   Doctors section
+   ========================================================================== */
+.doctors {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 80px;
+}
+.section-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.section-head h2 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: var(--teal-900);
+  margin-bottom: 8px;
+}
+.section-head p {
+  color: var(--teal-700);
+  font-size: 0.95rem;
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.doctor-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--line);
+}
+.doctor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.doctor-body { padding: 22px 24px 26px; }
+
+.doctor-body h3 {
+  font-size: 1.2rem;
+  color: var(--teal-900);
+  margin-bottom: 4px;
+}
+.doctor-degree {
+  color: var(--teal-500);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 0 0 4px;
+}
+.doctor-off {
+  font-size: 0.8rem;
+  color: #a15b2c;
+  background: #fbeee0;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.schedule li {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+.schedule li span:first-child { color: var(--ink); font-weight: 600; }
+.schedule li span:last-child { color: var(--teal-700); }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: var(--teal-900);
+  color: rgba(255,255,255,0.75);
+  padding: 26px 20px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Tablet — 600px and up
+   ========================================================================== */
+@media (min-width: 600px) {
+  .doctor-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { min-height: 70vh; }
+}
+
+/* ==========================================================================
+   Desktop — 992px and up
+   ========================================================================== */
+@media (min-width: 992px) {
+  :root { --header-h: 84px; }
+
+  .nav-toggle { display: none; }
+
+  .site-nav {
+    position: static;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
+    gap: 8px;
+    transform: none;
+    transition: none;
+  }
+  .nav-link { border-bottom: none; padding: 10px 16px; }
+
+  .doctor-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+
+  .hero { min-height: 82vh; }
+}
+
+/* ==========================================================================
+   Large desktop — 1400px and up
+   ========================================================================== */
+@media (min-width: 1400px) {
+  .doctors, .nav-wrap, .hero-inner { max-width: 1320px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .site-nav, .nav-toggle span, .btn { transition: none; }
+}
